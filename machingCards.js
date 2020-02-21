@@ -3,6 +3,8 @@ const row=4,col=3;
 const candidateColors=['red','red','pink','pink','green','green','white','white','orange','orange','yellow','yellow'];
 let colors=[];
 let clickFlag=true;
+let clickCard=[];
+let completed=[];
 
 function randomColorSuffle(){
 
@@ -32,8 +34,30 @@ function settingCard(col,row){
 
     (function(c){
     card.addEventListener('click',function(){
-        if(clickFlag===true){
+        if(clickFlag===true&&!completed.includes(c)){
       c.classList.toggle('flipped');
+      clickCard.push(c);
+      if(clickCard.length==2){
+          if(clickCard[0].querySelector('.card-back').style.backgroundColor===
+          clickCard[1].querySelector('.card-back').style.backgroundColor){
+
+            completed.push(clickCard[0]);
+            completed.push(clickCard[1]);
+            clickCard=[];
+          }
+          else{
+
+            clickFlag=false;
+            setTimeout(function(){
+                clickCard[0].classList.remove('flipped');
+                clickCard[1].classList.remove('flipped');
+                clickFlag=true;
+                clickCard=[];
+            },1000)
+
+          }
+          
+      }
         }
     });
     })(card);//for solving closure problem
