@@ -2,6 +2,7 @@ const row=4,col=3;
 
 const candidateColors=['red','red','pink','pink','green','green','white','white','orange','orange','yellow','yellow'];
 let colors=[];
+let clickFlag=true;
 
 function randomColorSuffle(){
 
@@ -11,6 +12,8 @@ function randomColorSuffle(){
 }
 
 function settingCard(col,row){
+    clickFlag=false;
+
     for(let i=0;i<col*row;i++){
     const card=document.createElement('div');
     card.className='card';
@@ -29,7 +32,9 @@ function settingCard(col,row){
 
     (function(c){
     card.addEventListener('click',function(){
+        if(clickFlag===true){
       c.classList.toggle('flipped');
+        }
     });
     })(card);//for solving closure problem
 
@@ -53,7 +58,9 @@ function initialShowing(){
 
             card.classList.remove('flipped');
         });
+         clickFlag=true;
     },5000);
+   
 }
 
 function init(){
