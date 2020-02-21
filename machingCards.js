@@ -4,7 +4,7 @@ function settingCard(col,row){
     for(let i=0;i<col*row;i++){
     const card=document.createElement('div');
     card.className='card';
-    const cardInner=docuemnt.createElement('div');
+    const cardInner=document.createElement('div');
     cardInner.className='card-inner';
 
     const cardFront=document.createElement('div');
@@ -21,14 +21,12 @@ function settingCard(col,row){
       c.classList.toggle('flipped');
     });
     })(card);//for solving closure problem
-    
-    document.body.appendChild(card);
 
-    }
+    document.querySelector("#wrapper").appendChild(card);
+
+    }//for
 }
 
-function init(){
+
     settingCard(col,row);
-}
 
-init();
