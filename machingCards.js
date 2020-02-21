@@ -1,10 +1,13 @@
 const row=4,col=3;
 
-const candidateColors=['red','red','pink','pink','green','green','white','white','orange','orange','yellow','yellow'];
+const colorArray=['red','red','pink','pink','green','green','white','white','orange','orange','yellow','yellow'];
+let candidateColors=colorArray.slice();
 let colors=[];
 let clickFlag=true;
 let clickCard=[];
 let completed=[];
+
+let startTime;
 
 function randomColorSuffle(){
 
@@ -44,6 +47,17 @@ function settingCard(col,row){
             completed.push(clickCard[0]);
             completed.push(clickCard[1]);
             clickCard=[];
+            if(completed.length===col*row){//re-initial
+
+                const endTime=new Date();
+                alert('congratulations!'+'you take'+(endTime-startTime)/1000);
+                document.querySelector('#wrapper').innerHTML='';
+                candidateColors=colorArray.slice();
+                completed=[];
+                colors=[];
+                startTime=null;
+                init();
+            }
           }
           else{
 
@@ -83,6 +97,7 @@ function initialShowing(){
             card.classList.remove('flipped');
         });
          clickFlag=true;
+         startTime=new Date();
     },5000);
    
 }
