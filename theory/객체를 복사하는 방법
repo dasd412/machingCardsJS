@@ -1,0 +1,56 @@
+첫 번째 방법:객체의 원시값을 대입하면 참조가 되지 않음을 이용한다.
+
+let obj={a:1,b:2};
+let obj2={};
+obj2.a=obj.a;
+obj2.b=obj.b;
+
+obj2.a=3;
+obj2.b=1;
+
+두 번째 방법:내장 함수 활용. 
+
+let obj={a:1,b:2,c:3};
+
+Object.keys(obj)를 하면, ["a","b","c"]로 출력됨.
+Object.keys()메서드는 객체의 속성명들을 배열로 바꿈.
+
+let obj2={};
+Object.keys(obj).forEach(function(key){
+obj2[key]=obj[key];
+});
+
+--------------------------------------------
+객체가 참조관계인지 확인하는 방법
+obj===obj2가 true면 참조관계이다.
+
+ex)let obj={a:1,b:2};
+obj2=obj;
+
+console.log(obj===obj2);=>true출력
+
+ex)let obj={a:1,b:2};
+let obj2={a:1,b:2};
+
+console.log(obj===obj2);=>false 출력(같은 원시값과 속성명을 가질 뿐, 주소는 다르므로
+참조관계가 아니다.)
+
+-----------------------------------------------
+내장함수인 forEach를 활용할 때 발생가능한 문제
+
+ex)
+let obj={a:1, b:{c:1}};<-속성 b는 속성c:1를 갖고 있는 객체다. 즉 객체안의 객체가 있다.
+
+let obj2={};
+Object.keys(obj).forEach(function(key){
+obj2[key]=obj[key];
+});
+
+obj2.a=5;
+obj2.b.c=8;
+을 한후
+
+console.log(obj.a,obj.b.c);를 하면 1,8이 출력된다.
+
+그 이유는 obj2[key]=obj[key]에서 obj.a는 원시값이므로 복사가 되었지만,
+obj.b는 객체이므로 참조가 되었기 때문이다.
