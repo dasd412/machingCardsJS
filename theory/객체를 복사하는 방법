@@ -44,7 +44,7 @@ let obj={a:1, b:{c:1}};<-속성 b는 속성c:1를 갖고 있는 객체다. 즉 객체안의 객체가
 let obj2={};
 Object.keys(obj).forEach(function(key){
 obj2[key]=obj[key];
-});
+});(Object.assign(obj2,obj);와 효과가 같다.)
 
 obj2.a=5;
 obj2.b.c=8;
