@@ -1,0 +1,23 @@
+자바스크립트의 원시형(불리언, 숫자, 문자열)의 경우 대입을 하면 복사가 된다.
+ex)
+let a='ex';
+let b=a;(<=>b='ex')
+b='test'라고 하자.
+
+console.log(a,b);를 하면, a는 그대로 ex, b=test로 출력이 된다.
+
+반면 객체의 경우,
+
+const person={
+    name:'zeroCho'
+}
+
+const duplicate=person;
+
+duplicate.name='something'
+
+console.log(person.name, duplicate.name);을 하면, something, something이 출력된다.
+
+즉, 객체는 대입하면 참조 관계가 된다.
+
+함수,배열도 자바스크립트에서 객체이므로 똑같이 적용된다.
