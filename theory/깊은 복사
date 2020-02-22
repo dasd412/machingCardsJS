@@ -1,0 +1,31 @@
+1.JSON을 이용한 깊은 복사
+
+let obj={a:1, b:{c:1}};
+
+let obj2=JSON.parse(JSON.stringify(obj));
+
+obj2.b.c=8;
+
+console.log(obj.b.c, obj2.b.c);를 하면 1,8이 출력된다.
+
+
+
+2.배열의 경우에는 slice()를 이용.(불완전한 깊은 복사)
+
+let arr=[1,2,3];
+
+let arr2=arr.slice();
+
+arr2[2]=10;
+
+console.log(arr[2],arr2[2]);를 하면 1,10이 출력된다. 
+
+단, 객체를 요소로 갖고 있는 경우에는 참조가 되버린다.
+
+let obj2={};
+Object.keys(obj).forEach(function(key){
+obj2[key]=obj[key];
+}); 
+위 코드와 같은 문제점을 갖고 있다고 보면 된다. 
+
+(즉, 요소가 객체인 경우, 대입을 하면 참조가 되버리는 것이다.)
